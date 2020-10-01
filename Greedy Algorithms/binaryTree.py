@@ -4,3 +4,4 @@ class Node(object):
         """ A typical binary tree node """
         self.left = left
         self.right = right
+
