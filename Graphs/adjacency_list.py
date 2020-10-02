@@ -2,7 +2,6 @@
 
 
 class Graph:
-
     """
     Create a graph for the number of vertices specified. The graph
     object comprises a list with as many elements, initially set
@@ -21,7 +20,7 @@ class Graph:
     # in A's adjacency list) and B is adjacent to A (therefore A
     # needs to be in B's adjacency list).
 
-    def add_edge(self, source_vertex, destination_vertex):
+    def edge_between(self, source_vertex, destination_vertex):
 
         # Add destination to the adjacency list of the source node
         node = adjacency_node(destination_vertex)
@@ -49,6 +48,7 @@ class Graph:
                 temp = temp.next
             print(" \n")
 
+                                #  JAVA EQV
 class adjacency_node:           #  public Node(data) {
     def __init__(self, data):   #    this.vertex = data;
         self.vertex = data      #    next = null;
@@ -58,7 +58,7 @@ class adjacency_node:           #  public Node(data) {
 if __name__ == "__main__":
     V = 3
     graph = Graph(V)
-    graph.add_edge(0,1)
-    graph.add_edge(0,2)
+    graph.edge_between(0, 1)
+    graph.edge_between(0, 2)
 
     graph.display_adjacency_list()
