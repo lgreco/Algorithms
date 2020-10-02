@@ -41,11 +41,11 @@ class Graph:
             current_vertex = self.graph[vertex_label]
             # follow the trail
             while current_vertex:
-                print(" -> {}".format(current_vertex.vertex), end="")
+                print(" {} ".format(current_vertex.vertex), end="")
                 current_vertex = current_vertex.next
             print(" \n")
 
-                                #  JAVA EQV
+                                #  JAVA EQV constructor for linked list Node.
 class adjacency_node:           #  public Node(data) {
     def __init__(self, data):   #    this.vertex = data;
         self.vertex = data      #    next = null;
@@ -53,9 +53,11 @@ class adjacency_node:           #  public Node(data) {
 
 # main()
 if __name__ == "__main__":
-    V = 3
+    V = 4
     graph = Graph(V)
     graph.edge_between(0, 1)
     graph.edge_between(0, 2)
+    graph.edge_between(1, 2)
+    graph.edge_between(2, 3)
 
     graph.display_adjacency_list()
