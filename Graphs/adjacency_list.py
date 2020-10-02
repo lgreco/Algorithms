@@ -2,15 +2,13 @@
 
 
 class Graph:
-    """
-    Create a graph for the number of vertices specified. The graph
-    object comprises a list with as many elements, initially set
-    to None.
-    """
+
+    # Create a graph for the number of vertices specified. The graph
+    # object comprises a list with as many elements, initially set to None.
+    #
     def __init__(self, how_many_vertices):
         self.V = how_many_vertices
         self.graph = [None] * self.V
-
 
     # Add an edge between two vertices ... this is a bit
     # tricky for an undirected graph, between any two adjacent
@@ -19,16 +17,13 @@ class Graph:
     # means that A is adjacent to B (therefore B needs to be
     # in A's adjacency list) and B is adjacent to A (therefore A
     # needs to be in B's adjacency list).
-
+    #
     def edge_between(self, source_vertex, destination_vertex):
 
         # Add destination to the adjacency list of the source node
         node = adjacency_node(destination_vertex)
         node.next = self.graph[source_vertex]
-        print("Source node: ", source_vertex)
-        print("Destination node: ", destination_vertex)
         if (node.next != None):
-            print("Destination's .next points to node: ", node.next.vertex)
         self.graph[source_vertex] = node
 
         # Add source to the adjacency list of the destination node
