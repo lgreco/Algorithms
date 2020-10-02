@@ -36,12 +36,12 @@ class Graph:
     def display_adjacency_list(self):
         # loop over vertex
         for vertex_label in range(self.V):
-            print("Vertex {} is adjacent to ".format(vertex_label), end=" ... ")
+            print("Vertex", vertex_label, "is adjacent to vertices: ", end="") # end="" prevents \n
             # get the head vertex for this label
             current_vertex = self.graph[vertex_label]
             # follow the trail
             while current_vertex:
-                print(" {} ".format(current_vertex.vertex), end="")
+                print(current_vertex.vertex, end=" ")
                 current_vertex = current_vertex.next
             print(" \n")
 
