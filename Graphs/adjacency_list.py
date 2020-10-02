@@ -1,4 +1,4 @@
-# A list of adjacency lists for a graph G = (V,E)
+# A list of adjacency linked lists for a graph G = (V,E)
 
 
 class Graph:
@@ -23,7 +23,6 @@ class Graph:
         # Add destination to the adjacency list of the source node
         node = adjacency_node(destination_vertex)
         node.next = self.graph[source_vertex]
-        if (node.next != None):
         self.graph[source_vertex] = node
 
         # Add source to the adjacency list of the destination node
@@ -33,14 +32,17 @@ class Graph:
 
 
     # display routine
-
+    #
     def display_adjacency_list(self):
-        for vertex in range(self.V):
-            print("Vertex {} is adjacent to ".format(vertex), end=" ... ")
-            temp = self.graph[vertex]
-            while temp:
-                print(" -> {}".format(temp.vertex), end="")
-                temp = temp.next
+        # loop over vertex
+        for vertex_label in range(self.V):
+            print("Vertex {} is adjacent to ".format(vertex_label), end=" ... ")
+            # get the head vertex for this label
+            current_vertex = self.graph[vertex_label]
+            # follow the trail
+            while current_vertex:
+                print(" -> {}".format(current_vertex.vertex), end="")
+                current_vertex = current_vertex.next
             print(" \n")
 
                                 #  JAVA EQV
