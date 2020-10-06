@@ -1,5 +1,6 @@
 
 # Topological sorting based on recursive DFS
+# (Homework #5: find the bug)
 
 # Iterative wrapper
 def topological_sorting(graph):
