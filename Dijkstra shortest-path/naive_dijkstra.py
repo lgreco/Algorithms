@@ -102,6 +102,6 @@ print("\nDistances from starting point",starting_vertex)
 for vertex in distance.keys():
     print("\tTo vertex", vertex,": ", end='')
     if distance[vertex] == infinity:
-        print(u'\u221E') # Unicode for infinity symbol
+        print(u'\u221E') # Unicode for infinity symbol 221E
     else:
         print(distance[vertex])

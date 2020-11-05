@@ -1,7 +1,7 @@
 #
 #      A simple Node class with an initial constructor, an insertion
 #      method, a listing method, and a  membership test. Insertions,
-#      listings, and membership t ests  are conducted  using  Binary
+#      listings, and membership  tests  are conducted  using  Binary
 #      Search Tree rules.  Therefore, objects instantiated from this
 #      class behave like BSTs.                      
 #
@@ -12,7 +12,7 @@
 #                                                   COMP 363 002 F20
 #
 class Node:
-    
+
     #
     # Initial constructor for first node in the structure.
     # instantiates an object with the given content and no children.
@@ -25,8 +25,9 @@ class Node:
     def __init__(self, content):
         self.left = None
         self.right = None
+        self.parent = None
         self.content = content
-        
+
     # 
     # Method to insert data into the tree; content is placed
     # to the left or right of parent node, based on comparisons
@@ -37,7 +38,7 @@ class Node:
     #   myTreeName.insert(newValue)
     #
     def insert(self, newValue):
-        
+
         if self.content is None:                # Current node is empty!
             self.content = newValue             #   place new value here.
         else:                                   # current node not empty
@@ -52,7 +53,7 @@ class Node:
                 else:                           #   if right child not null
                     self.right.insert(newValue) #     recurse to the right
 
-                    
+
     #
     # In-order tree traversal lists the contents of the tree in
     # ascending order. The recursive algorith can be applied on
@@ -73,7 +74,7 @@ class Node:
         print(self.content)               # process the node
         if self.right:                    # if right child not null
             self.right.inOrderTraversal() #    process it
-            
+
     #
     # method to test membership in a tree. It can be applied on
     # any node (though, usually we start at the root) and returns
@@ -94,7 +95,41 @@ class Node:
             return self.right.contains(searchFor)
         else:
             return True
-            
+
+    # Max
+    def maxNode(self):
+        current = self
+        if current.right is not None:
+            return current.right.maxNode()
+        return current.content
+
+    #Min
+    def minNode(self):
+        current = self
+        if current.left is not None:
+            return current.left.minNode()
+        return current.content
+
+
+#predecessor
+def predecessorNode(currentNode, previous, key):
+    if currentNode is None:
+        return None
+
+    # if .left not empty max(.left) but first find node of interest
+    if currentNode.content == key:
+        if currentNode.left is not None:
+            return currentNode.left.maxNode()
+    elif key < currentNode.content:
+        return predecessorNode(currentNode.left, previous, key)
+    else:
+        previous = currentNode
+        return predecessorNode(currentNode.right, previous, key)
+    return previous
+
+
+#
+# DRIVING CODE
 #
 # Use GitHub:dwyl's english words project to populate a BST
 # with words, as if it was a dictionary.
@@ -104,7 +139,41 @@ class Node:
 
 words = open('../CommonDataFiles/words_alpha.txt', 'r')
 words = words.read()
-words = words.split('\n') 
+words = words.split('\n')
+number_of_words = len(words)
+number_of_words_100th = int(number_of_words/100)
 
 # at this point, words is a list with 370,103 items, 
 # specifically english words in alphabetical order.
+# Let's scramble them.
+import random
+words = sorted(words, key = lambda  x:random.random())
+#print(words)
+
+# create a tree using the first word in the list
+first_word = words[0]
+words.remove(words[0])
+print("The tree will be build on root value of", first_word)
+
+root = Node(first_word)
+
+# add words to tree
+word_counter = 0
+for word in words:
+    root.insert(word)
+    word_counter = word_counter + 1
+    if (word_counter%number_of_words_100th == 0):
+        print(".", end="")
+
+# Try in-Order traversal
+#root.inOrderTraversal()
+
+print(root.maxNode())
+
+predecessor =  (predecessorNode(root, None, 'zyzzyvas'))
+
+
+if predecessor is not None:
+    print(predecessor.content)
+else:
+    print("Nothing found")
